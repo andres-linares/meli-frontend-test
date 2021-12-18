@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <Link href="/">
-        <Image src="/Logo_ML.png" alt="MercadoLibre Logo" width={106} height={72} />
+        <Image src="/icons/Logo_ML.png" alt="MercadoLibre Logo" width={53} height={36} />
       </Link>
 
       <SearchForm onSubmit={onSubmitSearch}/>
