@@ -1,8 +1,10 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Header from '../../components/Header'
+import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
+import Head from "next/head";
+import { fetchItems } from "../../api/items";
+import Header from "../../components/Header";
+import Product from "../../components/Product";
 
-const Items: NextPage = () => {
+const Items: NextPage = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <>
       <Head>
@@ -12,8 +14,23 @@ const Items: NextPage = () => {
       </Head>
 
       <Header />
+      <main>
+        <ul>{data.items && data.items.map((item: any) => <Product key={item.id} product={item} />)}</ul>
+      </main>
     </>
-  )
-}
+  );
+};
 
-export default Items
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const { search } = query;
+
+  if (!search || typeof search !== "string") {
+    return { redirect: { destination: "/", permanent: true } };
+  }
+
+  const data = await fetchItems(search);
+
+  return { props: { data } };
+};
+
+export default Items;
