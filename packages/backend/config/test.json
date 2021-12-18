@@ -1,0 +1,11 @@
+{
+  "api": "https://api.test.com",
+  "expressPort": 8081,
+  "redis": {
+    "expiration": 60
+  },
+  "author": {
+    "name": "Peter",
+    "lastname": "Parker"
+  }
+}

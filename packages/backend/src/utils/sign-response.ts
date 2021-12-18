@@ -1,6 +1,11 @@
 import config from "config";
+import { Author } from "../types/author";
 
-const signResponse = <T>(response: any): T => {
+interface Signed {
+  author: Author
+}
+
+const signResponse = <T>(response: T): T & Signed => {
   const name = config.get("author.name") as string;
   const lastname = config.get("author.lastname") as string;
 
