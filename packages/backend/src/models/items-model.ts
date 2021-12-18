@@ -11,9 +11,18 @@ const searchItems = async (query: string): Promise<SearchResponse> => {
   const filteredItems = items.map((item: any) => {
     const condition = item.attributes.find((attr: any) => attr.id === "ITEM_CONDITION").value_name;
 
+    const splitItemPrice = item.price.toString().split(".");
+    const itemPriceAmount = +splitItemPrice[0];
+    const itemPriceDecimals = +splitItemPrice[1] || 0;
+
     return {
       id: item.id,
       title: item.title,
+      price: {
+        currency: item.currency_id,
+        amount: itemPriceAmount,
+        decimals: itemPriceDecimals,
+      },
       picture: item.thumbnail,
       condition,
       free_shipping: item.shipping.free_shipping,
