@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Image from 'next/image';
+import IconSearch from '../../../public/icons/icon-search.png';
 import styles from "./SearchForm.module.sass";
 
 interface SearchFormProps {
@@ -29,7 +31,9 @@ const SearchForm = (props: SearchFormProps) => {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <button type="submit">🔍</button>
+        <button type="submit">
+          <Image src={IconSearch} alt="" />
+        </button>
       </div>
     </form>
   );
