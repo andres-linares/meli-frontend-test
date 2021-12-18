@@ -1,4 +1,5 @@
 import Link from "next/link";
+import styles from './Breadcrumbs.module.sass';
 
 interface Breadcrumb {
   link: string;
@@ -11,15 +12,15 @@ interface BreadcrumbsProps {
 
 const Breadcrumbs = ({ breadcrumbs }: BreadcrumbsProps) => {
   return (
-    <section>
+    <section className={styles['breadcrumbs-container']}>
       <ul>
-        {breadcrumbs.map((breadcrumb) => {
-          <li>
+        {breadcrumbs.map((breadcrumb) => (
+          <li key={breadcrumb.link}>
             <Link href={breadcrumb.link}>
               <a>{breadcrumb.text}</a>
             </Link>
-          </li>;
-        })}
+          </li>
+        ))}
       </ul>
     </section>
   );
