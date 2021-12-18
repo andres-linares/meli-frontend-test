@@ -1,8 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Product.module.sass";
+import { Item } from '@meli/backend/src/types/item'
+import IconShipping from '../../public/icons/icon-shipping.png';
 
-const Product = ({ product }) => {
+interface ProductProps {
+  product: Item
+}
+
+const Product = ({ product }: ProductProps) => {
   const formatter = new Intl.NumberFormat("es-CO", {
     style: "currency",
     currency: product.price.currency,
@@ -19,7 +25,7 @@ const Product = ({ product }) => {
             <div className={styles['price-container']}>
               <strong>{formattedPrice}</strong>
               {product.free_shipping && (
-                <Image src="/icons/ic_shipping.png" height={10} width={10} alt="Envio gratis" />
+                <Image src={IconShipping} alt="Envio gratis" />
               )}
             </div>
 
