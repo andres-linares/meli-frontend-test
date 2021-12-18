@@ -12,7 +12,8 @@ router.get("/", queryStringValidator, async (req, res) => {
 
     res.json(response);
   } catch (e) {
-    res.status(400).json({ error: "Something went wrong while searching products", message: e });
+    const error = "Something went wrong while searching products";
+    res.status(400).json({ error, message: e });
   }
 });
 
@@ -24,9 +25,8 @@ router.get("/:id", async (req, res) => {
 
     res.json(response);
   } catch (e) {
-    res
-      .status(400)
-      .json({ error: "Something went wrong while obtaining product detail", message: e });
+    const error = "Something went wrong while obtaining product detail";
+    res.status(400).json({ error, message: e });
   }
 });
 
