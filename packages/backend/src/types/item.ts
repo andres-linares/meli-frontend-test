@@ -13,7 +13,7 @@ export interface Item {
   free_shipping: boolean;
 }
 
-export interface ItemDetail {
+export interface ItemDetail extends Item {
   sold_quantity: number;
   description: string;
 }
