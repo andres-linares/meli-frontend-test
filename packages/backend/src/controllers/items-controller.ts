@@ -6,7 +6,7 @@ import redis from "../redis-client";
 const router = express.Router();
 
 router.get("/", queryStringValidator, async (req, res) => {
-  const { query } = req.query;
+  const { q: query } = req.query;
 
   const cacheQuery = await redis.get(`query-${query}`);
   
