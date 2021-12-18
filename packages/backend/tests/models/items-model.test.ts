@@ -30,7 +30,7 @@ describe("ItemsModel", () => {
     it("returns no more than 4 items", async () => {
       const response = await searchItems("zapatos");
 
-      expect(response.items.length).toBeLessThanOrEqual(4);
+      expect(response.items?.length).toBeLessThanOrEqual(4);
     });
 
     it("returns correct structure", async () => {
@@ -43,8 +43,8 @@ describe("ItemsModel", () => {
       mockedAxios.get.mockResolvedValueOnce({ data: SearchResponseGibberishJson });
       const response = await searchItems("wjiiojwerojiweoiwer");
 
-      expect(response.categories.length).toEqual(0);
-      expect(response.items.length).toEqual(0);
+      expect(response.categories).toEqual(undefined);
+      expect(response.items).toEqual(undefined);
     });
   });
 
@@ -75,12 +75,11 @@ describe("ItemsModel", () => {
       expect(response).toEqual(ItemDetailExpressJson);
     });
 
-    // it('does not return items nor categories when api response is also empty', async () => {
-    //   mockedAxios.get.mockResolvedValueOnce({ data: SearchResponseGibberishJson });
-    //   const response = await searchItems("wjiiojwerojiweoiwer");
+    it("does not return an item when the item with given id does not exist", async () => {
+      mockedAxios.get.mockRejectedValueOnce("");
+      const response = await getItemDetail("wjiiojwerojiweoiwer");
 
-    //   expect(response.categories.length).toEqual(0);
-    //   expect(response.items.length).toEqual(0);
-    // });
+      expect(response.item).toEqual(undefined);
+    });
   });
 });

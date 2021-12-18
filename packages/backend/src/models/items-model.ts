@@ -10,7 +10,7 @@ const searchItems = async (query: string): Promise<SearchResponse> => {
   const items = response.results;
 
   if (items.length === 0) {
-    return signResponse({ items: [], categories: [] });
+    return signResponse({});
   }
 
   const filteredItems = items.slice(0, 4).map((item: any) => {
@@ -53,35 +53,39 @@ const getItemDetail = async (id: string): Promise<DetailResponse> => {
     axios.get(`${baseUrl}/items/${id}/description`),
   ];
 
-  const [itemResponse, descriptionResponse] = await Promise.all(promises);
-  const item = itemResponse.data;
-  const description = descriptionResponse.data;
+  try {
+    const [itemResponse, descriptionResponse] = await Promise.all(promises);
+    const item = itemResponse.data;
+    const description = descriptionResponse.data;
 
-  const itemPicture = item.pictures[0].url;
-  const itemCondition = item.attributes.find(
-    (attr: any) => attr.id === "ITEM_CONDITION"
-  ).value_name;
+    const itemPicture = item.pictures[0].url;
+    const itemCondition = item.attributes.find(
+      (attr: any) => attr.id === "ITEM_CONDITION"
+    ).value_name;
 
-  const splitItemPrice = item.price.toString().split(".");
-  const itemPriceAmount = +splitItemPrice[0];
-  const itemPriceDecimals = +splitItemPrice[1] || 0;
+    const splitItemPrice = item.price.toString().split(".");
+    const itemPriceAmount = +splitItemPrice[0];
+    const itemPriceDecimals = +splitItemPrice[1] || 0;
 
-  return signResponse({
-    item: {
-      id: item.id,
-      title: item.title,
-      price: {
-        currency: item.currency_id,
-        amount: itemPriceAmount,
-        decimals: itemPriceDecimals,
+    return signResponse({
+      item: {
+        id: item.id,
+        title: item.title,
+        price: {
+          currency: item.currency_id,
+          amount: itemPriceAmount,
+          decimals: itemPriceDecimals,
+        },
+        picture: itemPicture,
+        condition: itemCondition,
+        free_shipping: item.shipping.free_shipping,
+        sold_quantity: item.sold_quantity,
+        description: description.text,
       },
-      picture: itemPicture,
-      condition: itemCondition,
-      free_shipping: item.shipping.free_shipping,
-      sold_quantity: item.sold_quantity,
-      description: description.text,
-    },
-  });
+    });
+  } catch {
+    return signResponse({});
+  }
 };
 
 export { searchItems, getItemDetail };
