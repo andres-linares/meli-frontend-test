@@ -1,0 +1,13 @@
+{
+  "name": "meli-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "andres-linares",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
+}
