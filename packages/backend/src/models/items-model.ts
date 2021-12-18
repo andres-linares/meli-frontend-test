@@ -29,19 +29,38 @@ const searchItems = async (query: string): Promise<SearchResponse> => {
 const getItemDetail = async (id: string): Promise<DetailResponse> => {
   const baseUrl = config.get("api") as string;
 
-  const itemResponse = (await axios.get(`${baseUrl}/items/${id}`)).data;
-  const itemDetailResponse = (await axios.get(`${baseUrl}/items/${id}/description`)).data;
-  
-  return {
-    author:{
-      name: config.get('author.name'),
-      lastname: config.get('author.lastname')
-    },
+  const promises = [
+    axios.get(`${baseUrl}/items/${id}`),
+    axios.get(`${baseUrl}/items/${id}/description`),
+  ];
+
+  const [itemResponse, descriptionResponse] = await Promise.all(promises);
+  const item = itemResponse.data;
+  const description = descriptionResponse.data;
+
+  const itemPicture = item.pictures[0].url;
+  const itemCondition = item.attributes.find((attr: any) => attr.id === "ITEM_CONDITION").value_name;
+
+  const splitItemPrice = item.price.toString().split('.');
+  const itemPriceAmount = +splitItemPrice[0];
+  const itemPriceDecimals = +splitItemPrice[1] || 0;
+
+  return signResponse({
     item: {
-      description: '',
-      sold_quantity: 1,
-    }
-  }
+      id: item.id,
+      title: item.title,
+      price: {
+        currency: item.currency_id,
+        amount: itemPriceAmount,
+        decimals: itemPriceDecimals,
+      },
+      picture: itemPicture,
+      condition: itemCondition,
+      free_shipping: item.shipping.free_shipping,
+      sold_quantity: item.sold_quantity,
+      description: description.text,
+    },
+  });
 };
 
 export { searchItems, getItemDetail };
