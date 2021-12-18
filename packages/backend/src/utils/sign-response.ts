@@ -1,6 +1,6 @@
 import config from "config";
 
-const signResponse = (response: any) => {
+const signResponse = <T>(response: any): T => {
   const name = config.get("author.name") as string;
   const lastname = config.get("author.lastname") as string;
 
