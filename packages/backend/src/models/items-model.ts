@@ -8,6 +8,11 @@ const searchItems = async (query: string): Promise<SearchResponse> => {
   const response = (await axios.get(`${baseUrl}/sites/MLA/search?q=${query}`)).data;
 
   const items = response.results;
+
+  if (items.length === 0) {
+    return signResponse({ items: [], categories: [] });
+  }
+
   const filteredItems = items.slice(0, 4).map((item: any) => {
     const condition = item.attributes.find((attr: any) => attr.id === "ITEM_CONDITION").value_name;
 

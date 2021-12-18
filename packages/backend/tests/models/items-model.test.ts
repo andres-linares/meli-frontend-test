@@ -2,6 +2,7 @@ import axios from "axios";
 import config from "config";
 import { searchItems } from "../../src/models/items-model";
 import SearchResponseJson from "../fixtures/search-response.json";
+import SearchResponseGibberishJson from "../fixtures/search-response-gibberish.json";
 import SearchResponseExpressJson from "../fixtures/search-response-express.json";
 
 jest.mock("axios");
@@ -32,6 +33,14 @@ describe("ItemsModel", () => {
       const response = await searchItems("zapatos");
 
       expect(response).toEqual(SearchResponseExpressJson);
+    });
+    
+    it('does not return items nor categories when api response is also empty', async () => {
+      mockedAxios.get.mockResolvedValueOnce({ data: SearchResponseGibberishJson });
+      const response = await searchItems("wjiiojwerojiweoiwer");
+
+      expect(response.categories.length).toEqual(0);
+      expect(response.items.length).toEqual(0);
     });
   });
 });
