@@ -1,0 +1,8 @@
+{
+  "api": "https://api.mercadolibre.com",
+  "expressPort": 8080,
+  "author": {
+    "name": "Andrés",
+    "lastname": "Linares"
+  }
+}
