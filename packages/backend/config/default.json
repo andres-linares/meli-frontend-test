@@ -1,6 +1,9 @@
 {
   "api": "https://api.mercadolibre.com",
   "expressPort": 8080,
+  "redis": {
+    "expiration": 86400
+  },
   "author": {
     "name": "Andrés",
     "lastname": "Linares"
