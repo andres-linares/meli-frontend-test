@@ -1,6 +1,8 @@
 import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import ProductDetail from "../../components/ProductDetail";
 
 const ItemDetail: NextPage = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
@@ -11,7 +13,17 @@ const ItemDetail: NextPage = ({ data }: InferGetServerSidePropsType<typeof getSe
         <link rel="icon" href="/favicon.svg" />
       </Head>
 
-      <Image src={data.item.picture} width={680} height={680}></Image>
+      <Breadcrumbs
+        breadcrumbs={[
+          { link: "", text: "Electronica, Audio y Video" },
+          { link: "a", text: "iPod" },
+          { link: "b", text: "Reproductores" },
+          { link: "c", text: "iPod touch" },
+          { link: "d", text: "32 GB" },
+        ]}
+      />
+
+      <ProductDetail product={data.item} />
     </>
   );
 };
