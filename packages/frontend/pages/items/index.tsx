@@ -1,7 +1,6 @@
 import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
 import Head from "next/head";
 import { fetchItems } from "../../api/items";
-import Header from "../../components/Header";
 import Product from "../../components/Product";
 
 const Items: NextPage = ({ data, search }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -13,10 +12,7 @@ const Items: NextPage = ({ data, search }: InferGetServerSidePropsType<typeof ge
         <link rel="icon" href="/favicon.svg" />
       </Head>
 
-      <Header />
-      <main>
-        <ul>{data.items && data.items.map((item: any) => <Product key={item.id} product={item} />)}</ul>
-      </main>
+      <ul>{data.items && data.items.map((item: any) => <Product key={item.id} product={item} />)}</ul>
     </>
   );
 };

@@ -1,15 +1,8 @@
-import type {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-  NextPage,
-} from "next";
+import type { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import Header from "../../components/Header";
 
-const ItemDetail: NextPage = ({
-  data,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ItemDetail: NextPage = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <>
       <Head>
@@ -18,10 +11,7 @@ const ItemDetail: NextPage = ({
         <link rel="icon" href="/favicon.svg" />
       </Head>
 
-      <Header />
-      <main>
-        <Image src={data.item.picture} width={680} height={680}></Image>
-      </main>
+      <Image src={data.item.picture} width={680} height={680}></Image>
     </>
   );
 };
