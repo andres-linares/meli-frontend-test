@@ -1,5 +1,15 @@
 .product
   background: var(--color-white)
+  position: relative
+
+  &:not(:last-child)::after
+    content: ''
+    position: absolute
+    left: 1.5rem
+    right: 1.5rem
+    bottom: 0
+    height: 1px
+    background: var(--color-background)
 
   a
     display: flex
