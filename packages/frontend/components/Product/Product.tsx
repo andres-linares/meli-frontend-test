@@ -15,15 +15,15 @@ const Product = ({ product }) => {
         <a>
           <Image src={product.picture} height={180} width={180} alt="" />
 
-          <div className="{styles['product__content']}">
-            <div>
+          <div className={styles.content}>
+            <div className={styles['price-container']}>
               <strong>{formattedPrice}</strong>
               {product.free_shipping && (
                 <Image src="/icons/ic_shipping.png" height={10} width={10} alt="Envio gratis" />
               )}
             </div>
 
-            <h6>{product.title}</h6>
+            <h6 className={styles['title']}>{product.title}</h6>
           </div>
         </a>
       </Link>
