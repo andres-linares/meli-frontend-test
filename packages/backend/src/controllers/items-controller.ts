@@ -1,11 +1,11 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import queryStringValidator from "../middleware/validators/query-string";
 import { getItemDetail, searchItems } from "../models/items-model";
 import redis from "../redis-client";
 
 const router = express.Router();
 
-router.get("/", queryStringValidator, async (req, res) => {
+const searchEndpoint = async (req: Request, res: Response) => {
   const { q: query } = req.query;
 
   const cacheQuery = await redis.get(`query-${query}`);
@@ -24,9 +24,9 @@ router.get("/", queryStringValidator, async (req, res) => {
     const error = "Something went wrong while searching products";
     res.status(400).json({ error, message: e });
   }
-});
+}
 
-router.get("/:id", async (req, res) => {
+const itemEndpoint = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   const cacheQuery = await redis.get(`item-${id}`);
@@ -45,6 +45,10 @@ router.get("/:id", async (req, res) => {
     const error = "Something went wrong while obtaining product detail";
     res.status(400).json({ error, message: e });
   }
-});
+}
+
+router.get("/", queryStringValidator, searchEndpoint);
+router.get("/:id", itemEndpoint);
 
 export default router;
+export { searchEndpoint, itemEndpoint }
