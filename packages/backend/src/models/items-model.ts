@@ -8,20 +8,25 @@ const searchItems = async (query: string): Promise<SearchResponse> => {
   const response = (await axios.get(`${baseUrl}/sites/MLA/search?q=${query}`)).data;
 
   const items = response.results;
-  const filteredItems = items.map((x: any) => {
-    const condition = x.attributes.find((a: any) => a.id === "ITEM_CONDITION").value_name;
+  const filteredItems = items.map((item: any) => {
+    const condition = item.attributes.find((attr: any) => attr.id === "ITEM_CONDITION").value_name;
 
     return {
-      id: x.id,
-      title: x.title,
-      picture: x.thumbnail,
+      id: item.id,
+      title: item.title,
+      picture: item.thumbnail,
       condition,
-      free_shipping: x.shipping.free_shipping,
+      free_shipping: item.shipping.free_shipping,
     };
   });
 
+  const categoriesFilter = response.available_filters.find(
+    (filter: any) => filter.id === "category"
+  );
+  const categories = categoriesFilter.values.map((cat: any) => cat.name);
+
   return signResponse({
-    categories: [],
+    categories,
     items: filteredItems,
   });
 };
@@ -39,9 +44,11 @@ const getItemDetail = async (id: string): Promise<DetailResponse> => {
   const description = descriptionResponse.data;
 
   const itemPicture = item.pictures[0].url;
-  const itemCondition = item.attributes.find((attr: any) => attr.id === "ITEM_CONDITION").value_name;
+  const itemCondition = item.attributes.find(
+    (attr: any) => attr.id === "ITEM_CONDITION"
+  ).value_name;
 
-  const splitItemPrice = item.price.toString().split('.');
+  const splitItemPrice = item.price.toString().split(".");
   const itemPriceAmount = +splitItemPrice[0];
   const itemPriceDecimals = +splitItemPrice[1] || 0;
 
