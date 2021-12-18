@@ -14,11 +14,15 @@ const Header = () => {
 
   return (
     <header className={styles.header}>
-      <Link href="/">
-        <Image src="/icons/Logo_ML.png" alt="MercadoLibre Logo" width={53} height={36} />
-      </Link>
+      <div className={styles['header-container']}>
+        <Link href="/">
+          <a>
+            <Image src="/icons/Logo_ML.png" alt="MercadoLibre Logo" width={53} height={36} />
+          </a>
+        </Link>
 
-      <SearchForm onSubmit={onSubmitSearch}/>
+        <SearchForm onSubmit={onSubmitSearch}/>
+      </div>
     </header>
   );
 };
