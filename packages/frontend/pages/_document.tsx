@@ -1,5 +1,8 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 
+/**
+ * This file was overriden in oder to include the Proxima Nova font family.
+ */
 class MyDocument extends Document {
   render() {
     return (
