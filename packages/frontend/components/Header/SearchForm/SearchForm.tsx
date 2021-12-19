@@ -6,10 +6,11 @@ import styles from "./SearchForm.module.sass";
 interface SearchFormProps {
   onSubmit: (query: string) => void;
   placeholder: string;
+  initialValue?: string;
 }
 
-const SearchForm = ({ onSubmit, placeholder }: SearchFormProps) => {
-  const [search, setSearch] = useState("");
+const SearchForm = ({ onSubmit, placeholder, initialValue }: SearchFormProps) => {
+  const [search, setSearch] = useState(initialValue || "");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

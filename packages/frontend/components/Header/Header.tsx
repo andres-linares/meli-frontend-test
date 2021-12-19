@@ -23,7 +23,11 @@ const Header = () => {
           </a>
         </Link>
 
-        <SearchForm onSubmit={onSubmitSearch} placeholder="Nunca dejes de buscar" />
+        <SearchForm
+          onSubmit={onSubmitSearch}
+          placeholder="Nunca dejes de buscar"
+          initialValue={router.query.search?.toString()}
+        />
       </div>
     </header>
   );
