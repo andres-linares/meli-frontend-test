@@ -1,34 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Meli Frontend Test - FRONTEND
 
-## Getting Started
+This project is built with Express + Typescript. A Cache layer is added using Redis to optimize loading times of incoming requests.
 
-First, run the development server:
+The purpose of this app is esentially to construct a BFF (Backend For Frontend). It will be a middleman for the data Frontend needs and will perform some optimizations like reducing data to only what is absolutely necessary and use cache to reduce requests time.
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Why Typescript?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Typescript is a superset of Javascript. We can do the same things we already do with JS but we can enhance the development process and code quality by adding (or forcing) types.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+In the `src/types` folder we find the entities that are important for this project and we can also share them with the Frontend App thanks to the monorepo architecture.
+Typescript was configured in strict mode meaning that we enforce the use of types for parameters, returns, variables, etc...
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## What could have been improved?
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Things that I would like to improve later on with more experience and knowledge.
 
-## Learn More
+### Testing
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I love TDD, and I would have like to have done it here. But, TDD requires a lot of knowledge in the technology it is being applied.
+My expectations is that in a short future I can use TDD for Node.
