@@ -11,7 +11,13 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
   return (
     <div className={styles["product-detail-container"]}>
       <div className={styles["top-content"]}>
-        <Image src={product.picture} alt="Imagen del producto" width={680} height={680} objectFit="contain" />
+        <Image
+          src={product.picture}
+          alt="Imagen del producto"
+          width={680}
+          height={680}
+          objectFit="contain"
+        />
 
         <section>
           <div>
@@ -20,14 +26,14 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
           </div>
 
           <h1>{product.title}</h1>
-          <div className={styles['price-container']}>
+          <div className={styles["price-container"]}>
             <span className="price">{formatPrice(product.price)}</span>
             <span className="price-decimals">
               {product.price.decimals.toString().padStart(2, "0")}
             </span>
           </div>
 
-          <button className={styles['buy-button']}>Comprar</button>
+          <button className={styles["buy-button"]}>Comprar</button>
         </section>
       </div>
 
