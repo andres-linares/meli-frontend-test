@@ -14,6 +14,8 @@ const SearchForm = ({ onSubmit, placeholder, initialValue }: SearchFormProps) =>
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!search) return;
+
     onSubmit(search);
   };
 
@@ -31,6 +33,7 @@ const SearchForm = ({ onSubmit, placeholder, initialValue }: SearchFormProps) =>
           placeholder={placeholder}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          required
         />
 
         <button type="submit" title="Buscar">
