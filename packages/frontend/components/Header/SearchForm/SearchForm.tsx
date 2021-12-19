@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import Image from 'next/image';
-import IconSearch from '../../../public/icons/icon-search.png';
+import Image from "next/image";
+import IconSearch from "../../../public/icons/icon-search.png";
 import styles from "./SearchForm.module.sass";
 
 interface SearchFormProps {
-  onSubmit: (query: string) => void
+  onSubmit: (query: string) => void;
+  placeholder: string;
 }
 
-const SearchForm = (props: SearchFormProps) => {
+const SearchForm = ({ onSubmit, placeholder }: SearchFormProps) => {
   const [search, setSearch] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    props.onSubmit(search);
-  }
+    onSubmit(search);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -26,12 +27,13 @@ const SearchForm = (props: SearchFormProps) => {
           type="search"
           name=""
           id="searchInput"
-          placeholder="Nunca dejes de buscar"
+          placeholder={placeholder}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <button type="submit">
+        <button type="submit" title="Buscar">
+          <span className="sr-only">Buscar</span>
           <Image src={IconSearch} alt="" />
         </button>
       </div>

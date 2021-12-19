@@ -1,27 +1,29 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
-import styles from './Header.module.sass';
+import styles from "./Header.module.sass";
 import SearchForm from "./SearchForm";
+import Logo from "../../public/icons/logo.png";
 
 const Header = () => {
   const router = useRouter();
 
   const onSubmitSearch = (query: string) => {
     router.push(`/items?search=${query}`);
-  }
+  };
 
   return (
     <header className={styles.header}>
-      <div className={styles['header-container']}>
+      <div className={styles["header-container"]}>
         <Link href="/">
-          <a>
-            <Image src="/icons/Logo_ML.png" alt="MercadoLibre Logo" width={53} height={36} />
+          <a title="Ir al inicio">
+            <span className="sr-only">Ir al inicio</span>
+            <Image src={Logo} alt="MercadoLibre Logo" />
           </a>
         </Link>
 
-        <SearchForm onSubmit={onSubmitSearch}/>
+        <SearchForm onSubmit={onSubmitSearch} placeholder="Nunca dejes de buscar" />
       </div>
     </header>
   );

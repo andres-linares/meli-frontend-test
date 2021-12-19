@@ -1,17 +1,18 @@
-.header 
+.header
   background: var(--color-primary)
   padding: 0.5rem 0
-  
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.05)
+
 .header-container
   display: flex
   align-items: center
   justify-content: center
-  width: var(--container-width)
+  max-width: var(--container-width)
   margin: 0 auto
-  column-gap: 2rem
+  column-gap: clamp(1rem, 2vw, 2rem)
 
   form
     flex: 1
-  
+
   a
     flex-shrink: 0

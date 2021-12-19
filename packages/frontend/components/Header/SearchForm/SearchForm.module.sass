@@ -4,14 +4,19 @@
 
   input
     font-size: 1.125rem
-    padding: 0.2em 1em
+    padding: 0.2em 0.88em
     border: none
     flex: 1
     border-radius: 4px 0 0 4px
 
   button
     border: none
-    background: #eee
-    height: 44px
-    width: 44px
+    background: var(--color-background)
+    height: 36px
+    width: 36px
     border-radius: 0 4px 4px 0
+    display: grid
+    place-items: center
+
+    &:hover
+      filter: brightness(0.95)
