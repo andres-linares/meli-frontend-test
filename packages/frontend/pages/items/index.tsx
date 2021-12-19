@@ -31,6 +31,12 @@ const Items: NextPage = ({
         <title>{ router.query.search } | Mercado Libre</title>
       </Head>
 
+      {
+        /*
+          Categories data is not obtained in the required format to create Breadcrumbs.
+          Therefore we use these placeholder breadcrumbs just for the sake of visualize.
+        */
+       }
       <Breadcrumbs
         breadcrumbs={[
           { link: "", text: "Electronica, Audio y Video" },
