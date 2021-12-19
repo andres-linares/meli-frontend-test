@@ -3,6 +3,8 @@ import { fetchItemDetail, fetchItems } from '../../api/items';
 
 const baseUrl = config.get('api');
 
+global.fetch = jest.fn().mockResolvedValue({ json: jest.fn() });
+
 describe("itemsAPI", () => {
   describe("fetchItems", () => {
     it("calls fetch with the proper url", async () => {
