@@ -1,5 +1,5 @@
 import config from 'config';
-import signResponse from "../../src/utils/sign-response";
+import signResponse from "../../../src/utils/sign-response";
 
 describe('signResponse', () => {
   it('adds an author property to a given object', () => {

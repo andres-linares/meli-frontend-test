@@ -10,7 +10,6 @@ const app = express();
 app.use(morgan(NODE_ENV === 'dev' ? 'dev' : 'common'));
 app.use(express.json());
 
-
 app.use('/api/items', itemsController);
 
 app.listen(EXPRESS_PORT, () => {

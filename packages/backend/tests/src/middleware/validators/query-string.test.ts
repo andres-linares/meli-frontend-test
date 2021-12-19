@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import queryStringValidator from "../../../src/middleware/validators/query-string";
+import queryStringValidator from "../../../../src/middleware/validators/query-string";
 
 let mockRequest: Partial<Request>;
 let mockResponse: Partial<Response>;

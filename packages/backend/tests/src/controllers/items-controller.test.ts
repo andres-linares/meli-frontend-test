@@ -1,7 +1,7 @@
-import redis from '../../src/redis-client';
-import { searchEndpoint, itemEndpoint } from '../../src/controllers/items-controller';
+import redis from '../../../src/redis-client';
+import { searchEndpoint, itemEndpoint } from '../../../src/controllers/items-controller';
 import { Request, Response } from 'express';
-import * as itemModel from '../../src/models/items-model';
+import * as itemModel from '../../../src/models/items-model';
 
 jest.mock('../../src/redis-client');
 jest.mock('../../src/models/items-model');
