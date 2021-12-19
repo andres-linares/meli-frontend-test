@@ -5,8 +5,18 @@
 
 .top-content
   display: flex
+  flex-wrap: wrap
   column-gap: 3vw
   justify-content: space-between
+
+  section
+    flex: 1 2
+    min-width: 30ch
+    max-width: 45ch
+
+  > span
+    flex: 1 0
+    min-width: min(500px, 50vw)
 
   h1
     font-size: 1.5rem
