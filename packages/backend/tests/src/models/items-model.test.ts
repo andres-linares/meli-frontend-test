@@ -1,13 +1,13 @@
 import axios from "axios";
 import config from "config";
-import { getItemDetail, searchItems } from "../../../src/models/items-model";
+import { getItemDetail, searchItems } from "~/models/items-model";
 
-import SearchResponseJson from "../../fixtures/search-response.json";
-import SearchResponseGibberishJson from "../../fixtures/search-response-gibberish.json";
-import SearchResponseExpressJson from "../../fixtures/search-response-express.json";
-import ItemDetailJson from "../../fixtures/item-detail.json";
-import ItemDetailDescriptionJson from "../../fixtures/item-detail-description.json";
-import ItemDetailExpressJson from "../../fixtures/item-detail-express.json";
+import SearchResponseJson from "~tests/fixtures/search-response.json";
+import SearchResponseGibberishJson from "~tests/fixtures/search-response-gibberish.json";
+import SearchResponseExpressJson from "~tests/fixtures/search-response-express.json";
+import ItemDetailJson from "~tests/fixtures/item-detail.json";
+import ItemDetailDescriptionJson from "~tests/fixtures/item-detail-description.json";
+import ItemDetailExpressJson from "~tests/fixtures/item-detail-express.json";
 
 jest.mock("axios");
 

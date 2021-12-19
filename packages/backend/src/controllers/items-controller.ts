@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
-import queryStringValidator from "../middleware/validators/query-string";
-import { getItemDetail, searchItems } from "../models/items-model";
-import redis from "../redis-client";
+import queryStringValidator from "~/middleware/validators/query-string";
+import { getItemDetail, searchItems } from "~/models/items-model";
+import redis from "~/redis-client";
 
 const router = express.Router();
 
@@ -9,7 +9,7 @@ const searchEndpoint = async (req: Request, res: Response) => {
   const { q: query } = req.query;
 
   const cacheQuery = await redis.get(`query-${query}`);
-  
+
   if (cacheQuery) {
     res.json(JSON.parse(cacheQuery));
     return;
@@ -24,13 +24,13 @@ const searchEndpoint = async (req: Request, res: Response) => {
     const error = "Something went wrong while searching products";
     res.status(400).json({ error, message: e });
   }
-}
+};
 
 const itemEndpoint = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   const cacheQuery = await redis.get(`item-${id}`);
-  
+
   if (cacheQuery) {
     res.json(JSON.parse(cacheQuery));
     return;
@@ -45,10 +45,10 @@ const itemEndpoint = async (req: Request, res: Response) => {
     const error = "Something went wrong while obtaining product detail";
     res.status(400).json({ error, message: e });
   }
-}
+};
 
 router.get("/", queryStringValidator, searchEndpoint);
 router.get("/:id", itemEndpoint);
 
 export default router;
-export { searchEndpoint, itemEndpoint }
+export { searchEndpoint, itemEndpoint };

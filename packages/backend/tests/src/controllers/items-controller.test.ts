@@ -1,10 +1,10 @@
-import redis from '../../../src/redis-client';
-import { searchEndpoint, itemEndpoint } from '../../../src/controllers/items-controller';
 import { Request, Response } from 'express';
-import * as itemModel from '../../../src/models/items-model';
+import redis from '~/redis-client';
+import { searchEndpoint, itemEndpoint } from '~/controllers/items-controller';
+import * as itemModel from '~/models/items-model';
 
-jest.mock('../../src/redis-client');
-jest.mock('../../src/models/items-model');
+jest.mock('~/redis-client');
+jest.mock('~/models/items-model');
 
 const mockedRedis = redis as jest.Mocked<typeof redis>;
 

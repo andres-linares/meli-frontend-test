@@ -1,7 +1,7 @@
-import config from 'config';
-import { createClient } from 'redis';
+import config from "config";
+import { createClient } from "redis";
 
-const EXPIRATION = config.get('redis.expiration') as number;
+const EXPIRATION = config.get("redis.expiration") as number;
 
 const client = createClient();
 
@@ -16,7 +16,7 @@ const redis = {
     if (!client.isOpen) await client.connect();
 
     return await client.get(key);
-  }
-}
+  },
+};
 
 export default redis;

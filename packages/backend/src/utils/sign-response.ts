@@ -1,8 +1,8 @@
 import config from "config";
-import { Author } from "../types/author";
+import { Author } from "~/types/author";
 
 interface Signed {
-  author: Author
+  author: Author;
 }
 
 const signResponse = <T>(response: T): T & Signed => {

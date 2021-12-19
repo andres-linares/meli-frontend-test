@@ -1,7 +1,7 @@
 import config from "config";
 import axios from "axios";
-import { DetailResponse, SearchResponse } from "../types/responses";
-import signResponse from "../utils/sign-response";
+import { DetailResponse, SearchResponse } from "~/types/responses";
+import signResponse from "~/utils/sign-response";
 
 const searchItems = async (query: string): Promise<SearchResponse> => {
   const baseUrl = config.get("api") as string;
