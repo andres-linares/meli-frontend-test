@@ -2,6 +2,9 @@
   background: var(--color-white)
   position: relative
 
+  &:first-child
+    border-radius: 4px 4px 0 0
+
   &:not(:last-child)::after
     content: ''
     position: absolute
@@ -29,7 +32,7 @@
   strong
     font-size: 1.5rem
     font-weight: 500
-    margin-right: 0.5rem
+    margin-right: 0.625rem
 
 .title
   font-size: 1.125rem
