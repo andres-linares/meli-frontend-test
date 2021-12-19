@@ -6,7 +6,6 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Mercado Libre - Buscador</title>
-        <link rel="icon" href="/favicon.svg" />
       </Head>
     </>
   );
