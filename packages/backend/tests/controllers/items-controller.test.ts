@@ -1,6 +1,7 @@
 import redis from '../../src/redis-client';
 import { searchEndpoint, itemEndpoint } from '../../src/controllers/items-controller';
 import { Request, Response } from 'express';
+import { getItemDetail, searchItems } from '../../src/models/items-model';
 
 jest.mock('../../src/redis-client');
 jest.mock('../../src/models/items-model');
@@ -18,40 +19,90 @@ describe('ItemsController', () => {
         mockResponse = { status: jest.fn().mockReturnThis(), json: jest.fn() };
       });
 
-      it('returns the cached response when the query exists in cache', async () => {
-        mockedRedis.get.mockResolvedValueOnce(JSON.stringify({ success: 'yeah' }));
+      describe('cache HIT', () => {
+        beforeAll(() => {
+          mockedRedis.get.mockResolvedValue(JSON.stringify({ ok: 'yes' }));
+        });
 
-        await searchEndpoint(mockRequest as Request, mockResponse as Response);
+        it('returns the cached response', async () => {  
+          await searchEndpoint(mockRequest as Request, mockResponse as Response);
+  
+          expect(mockResponse.json).toHaveBeenCalledWith({ ok: 'yes' });
+        });
 
-        expect(mockResponse.json).toHaveBeenCalledWith({ success: 'yeah' });
+        it('does not call redis.set nor searchItems', async() => {
+          await searchEndpoint(mockRequest as Request, mockResponse as Response);
+          
+          expect(redis.set).not.toHaveBeenCalled();
+          expect(searchItems).not.toHaveBeenCalled();
+        });
       });
 
-      it('sets the result on cache when query does not exist', async () => {
-        mockedRedis.get.mockResolvedValueOnce(null);
+      describe('cache MISS', () => {
+        beforeAll(() => {
+          mockedRedis.get.mockResolvedValue(null);
+        });
 
-        await searchEndpoint(mockRequest as Request, mockResponse as Response);
+        it('does not return the null response from cache', async() => {
+          await searchEndpoint(mockRequest as Request, mockResponse as Response);
 
-        expect(mockedRedis.set).toHaveBeenCalled();
-      });
+          expect(mockResponse.json).not.toHaveBeenCalledWith(null);
+        });
 
-      it('does not call set nor searchItems when query is in cache', () => {
+        it('calls searchItems and redis.set', async () => {
+          await searchEndpoint(mockRequest as Request, mockResponse as Response);
 
+          expect(redis.set).toHaveBeenCalled()
+          expect(searchItems).toHaveBeenCalled();
+        });
       });
     });
   });
 
   describe('itemEndpoint', () => {
     describe('redis', () => {
-      it('returns the cached response when the id exists in cache', () => {
-
+      beforeEach(() => {
+        mockRequest = { params: { id: 'test' } };
+        mockResponse = { status: jest.fn().mockReturnThis(), json: jest.fn() };
       });
 
-      it('sets the item on cache when it does not exist', () => {
+      describe('cache HIT', () => {
+        beforeAll(() => {
+          jest.resetAllMocks();
+          mockedRedis.get.mockResolvedValue(JSON.stringify({ ok: 'yes' }));
+        });
 
+        it('returns the cached response', async () => {  
+          await itemEndpoint(mockRequest as Request, mockResponse as Response);
+  
+          expect(mockResponse.json).toHaveBeenCalledWith({ ok: 'yes' });
+        });
+
+        it('does not call redis.set nor getItemDetail', async() => {
+          await itemEndpoint(mockRequest as Request, mockResponse as Response);
+          
+          expect(redis.set).not.toHaveBeenCalled();
+          expect(getItemDetail).not.toHaveBeenCalled();
+        });
       });
 
-      it('does not call set nor getItemDetail when item is in cache', () => {
+      describe('cache MISS', () => {
+        beforeAll(() => {
+          mockedRedis.get.mockResolvedValue(null);
+        });
 
+        it('does not return the null response from cache', async() => {
+          await itemEndpoint(mockRequest as Request, mockResponse as Response);
+
+          expect(mockResponse.json).not.toHaveBeenCalledWith(null);
+        });
+
+        it('calls getItemDetail and redis.set', async () => {
+          await itemEndpoint(mockRequest as Request, mockResponse as Response);
+
+          expect(redis.set).toHaveBeenCalled()
+          expect(getItemDetail).toHaveBeenCalled();
+        });
       });
     });
   });
