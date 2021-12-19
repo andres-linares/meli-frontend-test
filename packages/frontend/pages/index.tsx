@@ -6,10 +6,6 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Mercado Libre - Buscador</title>
-        <meta
-          name="description"
-          content="Compre productos con Envío Gratis en el día en Mercado Libre. Encuentre miles de marcas y productos a precios increíbles."
-        />
         <link rel="icon" href="/favicon.svg" />
       </Head>
     </>
