@@ -57,3 +57,7 @@ In my list of things to learn, Design Patterns are a must.
 ## Models
 
 I feel like there's quite some manipulations in the model as we have to work with the MeLi responses and transform them into another type of structure. Perhaps there would have been a better way.
+
+## Logging
+
+Currently I use Morgan to log incoming requests. I would have also liked to log caches to a log folder when the app is in production mode.
