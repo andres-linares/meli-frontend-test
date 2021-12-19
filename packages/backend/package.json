@@ -1,11 +1,13 @@
 {
   "name": "@meli/backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "andres-linares",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node dist/src/index.js",
     "test": "jest"
   },
   "dependencies": {
