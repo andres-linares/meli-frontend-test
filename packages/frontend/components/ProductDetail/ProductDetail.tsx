@@ -20,13 +20,13 @@ const ProductDetail = ({ product }: ProductDetailProps) => {
         />
 
         <section>
-          <div>
+          <div data-testid="statusDescriptor">
             <span>{product.condition}</span>&nbsp;-&nbsp;
             <span>{product.sold_quantity} vendidos</span>
           </div>
 
           <h1>{product.title}</h1>
-          <div className={styles["price-container"]}>
+          <div className={styles["price-container"]} data-testid="priceContainer">
             <span className="price">{formatPrice(product.price)}</span>
             <span className="price-decimals">
               {product.price.decimals.toString().padStart(2, "0")}
